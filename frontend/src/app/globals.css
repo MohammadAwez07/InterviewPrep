@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #0a0e1a;
+    --bg-card: #0f1629;
+    --bg-elevated: #141c35;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(99,102,241,0.4);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply antialiased;
+    background-color: var(--bg-primary);
+    color: #e2e8f0;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+  }
+}
+
+@layer components {
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .card-elevated {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #818cf8 0%, #60a5fa 50%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effects */
+  .glow-blue {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+  }
+  .glow-sm {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+  }
+
+  /* Input base */
+  .input-base {
+    @apply w-full bg-[#0a0e1a] border border-white/10 rounded-lg px-4 py-2.5 text-white
+           placeholder-gray-600 focus:outline-none focus:border-indigo-500/70
+           focus:ring-1 focus:ring-indigo-500/30 transition-all text-sm;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700
+           text-white font-semibold rounded-xl transition-all text-sm
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10
+           hover:border-white/20 text-gray-300 font-medium rounded-xl transition-all text-sm;
+  }
+  .btn-ghost {
+    @apply px-3 py-1.5 hover:bg-white/5 text-gray-400 hover:text-white
+           rounded-lg transition-all text-sm;
+  }
+
+  /* Tag / pill */
+  .tag {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .tag-easy   { @apply bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/30; }
+  .tag-medium { @apply bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30; }
+  .tag-hard   { @apply bg-red-500/15 text-red-400 ring-1 ring-red-500/30; }
+  .tag-blue   { @apply bg-blue-500/15 text-blue-400 ring-1 ring-blue-500/30; }
+  .tag-purple { @apply bg-purple-500/15 text-purple-400 ring-1 ring-purple-500/30; }
+}
+
+/* Page transitions */
+@layer utilities {
+  .text-muted { color: #64748b; }
+  .text-soft  { color: #94a3b8; }
+  .bg-surface  { background: var(--bg-card); }
+  .bg-elevated { background: var(--bg-elevated); }
+  .border-subtle { border-color: var(--border); }
+
+  /* Animated gradient border */
+  .ring-glow {
+    box-shadow: 0 0 0 1px rgba(99,102,241,0.4), 0 0 20px rgba(99,102,241,0.1);
+  }
+}
+
+/* Monaco editor */
+.monaco-editor .overflow-guard { border-radius: 0 0 12px 12px !important; }
+
+/* React Flow */
+.react-flow__node {
+  background: #0f1629 !important;
+  border: 1px solid rgba(99,102,241,0.3) !important;
+  border-radius: 10px !important;
+  color: #e2e8f0 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  padding: 10px 16px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+}
+.react-flow__node.selected {
+  border-color: rgba(99,102,241,0.8) !important;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.3), 0 4px 20px rgba(0,0,0,0.4) !important;
+}
+.react-flow__edge-path { stroke: rgba(99,102,241,0.5) !important; stroke-width: 1.5 !important; }
+.react-flow__minimap { border-radius: 10px !important; background: #0a0e1a !important; }
+.react-flow__controls { border-radius: 10px !important; overflow: hidden; }
+.react-flow__controls-button {
+  background: #0f1629 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #94a3b8 !important;
+}
+
+/* Print styles for resume PDF export */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #resume-print-area,
+  #resume-print-area * {
+    visibility: visible;
+  }
+  #resume-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+  }
+  #resume-print-area h1,
+  #resume-print-area h2,
+  #resume-print-area h3,
+  #resume-print-area p,
+  #resume-print-area li,
+  #resume-print-area span {
+    color: black !important;
+  }
+}
